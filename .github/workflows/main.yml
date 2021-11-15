@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install Poetry
+        run: pip3 install --user poetry
+      - name: Install dependencies
+        run: python3 -m poetry install
+      - name: Run tests
+        run: python3 -m poetry run coverage run --branch -m pytest
+      - name: Coverage report
+        run: python3 -m poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+      - name: Static analysis
+        run: python3 -m poetry run pylint src
