@@ -26,5 +26,3 @@ jobs:
         run: python3 -m poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
-      - name: Static analysis
-        run: python3 -m poetry run pylint src
