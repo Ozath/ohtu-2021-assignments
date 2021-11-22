@@ -19,9 +19,12 @@ def main():
                 player_dict['team'],
                 player_dict['goals']
             )
-            players.append(player)
+#            players.append(player)
+            players.append(str(player))
 
     print("Players from FIN " + str(datetime.datetime.now()) + "\n")
+
+    players = sorted(players, key=lambda x: int(x.split("=")[1]), reverse=True)
 
     for player in players:
         print(player)
