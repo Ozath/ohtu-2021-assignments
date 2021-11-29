@@ -20,14 +20,10 @@ class IntJoukko:
         self.alkioiden_lkm = 0
 
     def kuuluu(self, n):
-        on = 0
         for i in range(0, self.alkioiden_lkm):
             if n == self.ljono[i]:
-                on = on + 1
-        if on > 0:
-            return True
-        else:
-            return False
+                return True
+        return False
 
     def lisaa(self, n):
         ei_ole = 0
@@ -40,6 +36,7 @@ class IntJoukko:
         if not self.kuuluu(n):
             self.ljono[self.alkioiden_lkm] = n
             self.alkioiden_lkm = self.alkioiden_lkm + 1
+
             if self.alkioiden_lkm % len(self.ljono) == 0:
                 taulukko_old = self.ljono
                 self.kopioi_taulukko(self.ljono, taulukko_old)
@@ -64,11 +61,14 @@ class IntJoukko:
             self.alkioiden_lkm = self.alkioiden_lkm - 1
             return True
         return False
+
     def kopioi_taulukko(self, a, b):
         for i in range(0, len(a)):
             b[i] = a[i]
+
     def mahtavuus(self):
         return self.alkioiden_lkm
+
     def to_int_list(self):
         taulu = [0] * self.alkioiden_lkm
         for i in range(0, len(taulu)):
@@ -84,6 +84,7 @@ class IntJoukko:
             x.lisaa(a_taulu[i])
         for i in range(0, len(b_taulu)):
             x.lisaa(b_taulu[i])
+
         return x
 
     @staticmethod
@@ -116,6 +117,7 @@ class IntJoukko:
         else:
             tuotos = "{"
             for i in range(0, self.alkioiden_lkm - 1):
-                tuotos = tuotos + str(self.ljono[i]) + ", "
+                tuotos = tuotos + str(self.ljono[i])
+                tuotos = tuotos + ", "
             tuotos = tuotos + str(self.ljono[self.alkioiden_lkm - 1]) + "}"
             return tuotos
